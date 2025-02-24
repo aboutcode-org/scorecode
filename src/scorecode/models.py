@@ -75,6 +75,7 @@ class ScorecardCheck(ModelMixin):
             data = {
                 "check_name": check.get("name"),
                 "check_score": str(check.get("score")),
+                "reason": check.get("reason", None),
                 "details": check.get("details", None),
             }
             checks.append(cls(**data))

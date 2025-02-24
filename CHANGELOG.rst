@@ -20,3 +20,7 @@ v0.0.2 - 2024-08-23
 
 Patch Release of scorecode to fix package name.
 
+v0.0.3 - 2025-02-24
+--------------------
+
+Patch Release of scorecode to fix checks in scorecard data.
