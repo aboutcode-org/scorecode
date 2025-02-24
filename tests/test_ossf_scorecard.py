@@ -42,3 +42,19 @@ def test_get_scorecard(platform, org, repo):
     # Check that the URL is valid and has the expected structure
     assert data.scoring_tool_documentation_url.startswith("https://github.com/")
     assert "docs/checks.md" in data.scoring_tool_documentation_url
+
+    # Check that data.checks contains valid ScorecardCheck objects
+    for check in data.checks:
+        assert hasattr(check, "check_name")
+        assert hasattr(check, "check_score")
+        assert hasattr(check, "reason")
+        assert hasattr(check, "details")
+
+        assert isinstance(check.check_name, str)
+        assert isinstance(check.check_score, str)
+        assert isinstance(check.reason, (str, type(None)))  # Allow None if not provided
+        assert isinstance(check.details, (list, type(None)))  # Allow None or list
+
+        # If details exist, ensure all elements are strings
+        if check.details:
+            assert all(isinstance(detail, str) for detail in check.details)
