@@ -6,8 +6,11 @@
 # See https://aboutcode.org for more information about nexB OSS projects.
 #
 
-from django.core.exceptions import ValidationError
+
+from datetime import datetime
+
 from django.db import models
+from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
 
@@ -65,8 +68,6 @@ class PackageScoreMixin(models.Model):
         Parse a date string into a timezone-aware datetime object,
         or return None if parsing fails.
         """
-        from datetime import datetime
-        from django.utils import timezone
 
         if not formats:
             formats = ["%Y-%m-%d", "%Y-%m-%dT%H:%M:%SZ"]
@@ -75,9 +76,7 @@ class PackageScoreMixin(models.Model):
             for fmt in formats:
                 try:
                     naive_datetime = datetime.strptime(date_str, fmt)
-                    return timezone.make_aware(
-                        naive_datetime, timezone.get_current_timezone()
-                    )
+                    return timezone.make_aware(naive_datetime, timezone.get_current_timezone())
                 except ValueError:
                     continue
 
