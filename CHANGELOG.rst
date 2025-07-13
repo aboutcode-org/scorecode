@@ -24,3 +24,8 @@ v0.0.3 - 2025-02-24
 --------------------
 
 Patch Release of scorecode to fix checks in scorecard data.
+
+v0.0.4 - 2025-07-12
+--------------------
+
+Added parsing score date functionality to `PackageScoreMixin`

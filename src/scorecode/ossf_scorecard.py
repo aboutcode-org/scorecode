@@ -47,7 +47,7 @@ def is_available():
     return response.ok
 
 
-def fetch_scorecard_info(package, logger):
+def fetch_scorecard_info(package, logger=None):
     """
     Return scorecard info for a list of discovered packages.
     """
