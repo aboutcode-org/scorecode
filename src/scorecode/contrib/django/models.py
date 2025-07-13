@@ -59,6 +59,30 @@ class PackageScoreMixin(models.Model):
         help_text=_("Date when the scoring was calculated on the package"),
     )
 
+    @classmethod
+    def parse_score_date(cls, date_str, formats=None):
+        """
+        Parse a date string into a timezone-aware datetime object,
+        or return None if parsing fails.
+        """
+        from datetime import datetime
+        from django.utils import timezone
+
+        if not formats:
+            formats = ["%Y-%m-%d", "%Y-%m-%dT%H:%M:%SZ"]
+
+        if date_str:
+            for fmt in formats:
+                try:
+                    naive_datetime = datetime.strptime(date_str, fmt)
+                    return timezone.make_aware(
+                        naive_datetime, timezone.get_current_timezone()
+                    )
+                except ValueError:
+                    continue
+
+        return None
+
     class Meta:
         abstract = True
 
